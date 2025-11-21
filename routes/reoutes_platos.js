@@ -74,3 +74,47 @@ router.post("/", (req, res) => {
 });
 
 
+// ACTUALIZAR PLATO
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion, precio, disponible, categoria_id } = req.body;
+
+  const query = `
+    UPDATE platos
+    SET nombre = ?, descripcion = ?, precio = ?, disponible = ?, categoria_id = ?, 
+        fecha_actualizacion = CURRENT_TIMESTAMP
+    WHERE id = ?
+  `;
+
+  db.run(
+    query,
+    [nombre, descripcion, precio, disponible, categoria_id, id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+
+      res.json({
+        message: "Plato actualizado",
+        cambios: this.changes
+      });
+    }
+  );
+});
+
+
+// ELIMINAR PLATO
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.run("DELETE FROM platos WHERE id = ?", [id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+
+    res.json({
+      message: "Plato eliminado",
+      cambios: this.changes
+    });
+  });
+});
+
+module.exports = router;
+
