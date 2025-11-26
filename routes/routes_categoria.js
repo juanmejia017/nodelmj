@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 // ===================================
 // ARCHIVO: routes/categorias.js
 // PROPÓSITO: Definir todas las rutas relacionadas con las categorías
@@ -198,3 +199,5 @@ router.delete('/:id', (req, res) => {
 
 // Exportar el router
 module.exports = router;
+=======
+>>>>>>> 748bbd42bb16e02bb67f55c43f5bcfca167ed74f
