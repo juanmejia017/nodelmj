@@ -21,9 +21,9 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
 // Crear tablas e insertar datos
 db.serialize(() => {
 
-  // ================================
+
   // TABLA CATEGORÍAS
-  // ================================
+
   db.run(`
     CREATE TABLE IF NOT EXISTS categorias (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -50,11 +50,10 @@ db.serialize(() => {
     );
   `);
 
-  // ================================
-  // INSERTAR DATOS POR DEFECTO (si no existen)
-  // ================================
 
-  // -------- Categorías ---------
+  // INSERTAR DATOS POR DEFECTO (si no existen) 
+
+  // Categorías
   db.get(`SELECT COUNT(*) AS count FROM categorias;`, (err, row) => {
     if (row.count === 0) {
       console.log('Insertando categorías iniciales...');
@@ -72,7 +71,7 @@ db.serialize(() => {
     }
   });
 
-  // -------- Platos ---------
+  // Platos
   db.get(`SELECT COUNT(*) AS count FROM platos;`, (err, row) => {
     if (row.count === 0) {
       console.log(' Insertando platos iniciales...');
